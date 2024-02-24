@@ -1,4 +1,4 @@
-# Password Generator
- First version of the Password Generator project.
+# Gerador de senha
+Primeira versão do projeto Gerador de senha
 
-The passwords that this initial project generates are random passwords.
+As senhas geradas na fase inicial do projeto são senhas aleatorias
