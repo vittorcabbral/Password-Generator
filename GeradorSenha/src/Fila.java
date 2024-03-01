@@ -2,43 +2,76 @@ import java.util.LinkedList;
 
 public class Fila {
     private GeradorSenha geradorS;
-    private LinkedList<Senha> filaSenha;
+    private LinkedList<Senha> filaSenhaN; // senha normal
+    private LinkedList<Senha> filaSenhaP;// senha prioridade
+    // private boolean controlePrioridade;
 
     public Fila() {
-        this.filaSenha = new LinkedList<Senha>();
+        this.filaSenhaN = new LinkedList<Senha>();
+        this.filaSenhaP = new LinkedList<Senha>();
         this.geradorS = new GeradorSenha();
+        // this.controlePrioridade = true;
     }
 
-    public  LinkedList<Senha> getFilaSenha() {
-        return filaSenha;
+    private  LinkedList<Senha> getFilaSenhaN() {
+        return filaSenhaN;
     }
 
-    public String criarSenha() {
-        Senha senha = geradorS.gerarSenha(this.getFilaSenha());
-        this.filaSenha.add(senha);
+    private LinkedList<Senha> getFilaSenhaP() {
+        return filaSenhaP;
+    }
+
+    // private boolean getControlePrioridade() {
+    //     return controlePrioridade;
+    // }
+
+    // private void setControlePrioridade(boolean controlePrioridade) {
+    //     this.controlePrioridade = controlePrioridade;
+    // }
+
+    public String criarSenha(boolean prioriade) {
+        Senha senha = geradorS.gerarSenha(prioriade);
+        if(prioriade){
+            this.filaSenhaP.add(senha);
+            return "\nNova senha - Prioridade: " + senha.getSenha();
+        }
+        this.filaSenhaN.add(senha);
 
         return "\nNova senha: " + senha.getSenha();
     }
 
-    public String chamarSenha() {
+    // public String chamarSenha() {
 
-        if(filaSenha.isEmpty()){
-            return "Fila vazia!";
-        }
-        Senha primeiraSenha = this.filaSenha.get(0);
-        filaSenha.remove(filaSenha.get(0));
-        return "\nSenha: " + primeiraSenha.getSenha();
-    }
+    //     if(filaSenha.isEmpty()){
+    //         return "Fila vazia!";
+    //     }
+    //     Senha primeiraSenha = this.filaSenha.get(0);
+    //     filaSenha.remove(filaSenha.get(0));
+    //     return "\nSenha: " + primeiraSenha.getSenha();
+    // }
 
-    @Override
-    public String toString() {
+    public String toString(boolean prioriade) {
 
         String senha = null;
-        if(!filaSenha.isEmpty()){
-            senha = "";
-            for(int i = 0; i < filaSenha.size(); i++){
-                senha += filaSenha.get(i).getSenha() + "/ ";
+        
+        if(prioriade){
+            if(!this.getFilaSenhaP().isEmpty()){
+                senha = "";
+                for(int i = 0; i < this.getFilaSenhaP().size(); i++) {
+                    senha += this.getFilaSenhaP().get(i).getSenha() + "/ ";
+                }
+                return "Fila - Prioridade = " + senha;
+            }else{
+                return "Fila - Prioridade = " + senha;
             }
+        }
+
+        if(!this.getFilaSenhaN().isEmpty()) {
+            senha = "";
+            for(int i = 0; i < this.getFilaSenhaN().size(); i++) {
+                senha += this.getFilaSenhaN().get(i).getSenha() + "/ ";
+            }
+            return "Fila = " + senha;
         }
         return "Fila = " + senha;
     }

@@ -1,49 +1,40 @@
-import java.util.LinkedList;
-import java.util.Random;
-
 public class GeradorSenha {
+    private int numeroN;
+    private int numeroP;
 
     public GeradorSenha() {
     }
-
-    public Senha gerarSenha(LinkedList<Senha> filaSenha) {
-        Senha senha = senhaString();
-        while(senhaValida(filaSenha, senha) == false){
-            senha = senhaString();
-        }
-        return senha;
+    
+    private int getNumeroN() {
+        return numeroN;
     }
 
-    public boolean senhaValida(LinkedList<Senha> filaSenha, Senha senha){
 
-        for(int i = 0; i < filaSenha.size(); i++){
-            if(senha == filaSenha.get(i)){
-                return false;
-            }
-        }
-        return true;
+    private void setNumeroN(int numeroN) {
+        this.numeroN = numeroN;
     }
 
-    private Senha senhaString(){
-        String caracteres = "abcdefghijklmnopqrstuvwxyz";
 
-        Random aleatorio = new Random();
-         
+    private int getNumeroP() {
+        return numeroP;
+    }
+
+
+    private void setNumeroP(int numeroP) {
+        this.numeroP = numeroP;
+    }
+
+    public Senha gerarSenha(boolean prioriade){
         String senha = "";
 
-        for (int i = 0; i < 4; i++) {
-
-            int posicao = aleatorio.nextInt(caracteres.length());
-            char charAleatorio = caracteres.charAt(posicao);
-            if (i % 2 == 0) {
-                senha += Character.toUpperCase(charAleatorio);
-            } else {
-                senha += charAleatorio;
-            }
-
-            int valor = aleatorio.nextInt(10);
-            senha += valor;
+        if(prioriade){
+            this.setNumeroP(this.getNumeroP() + 1);
+            senha = String.format("P%03d", this.getNumeroP());
+            return new Senha(senha);
         }
+        this.setNumeroN(this.getNumeroN() + 1);
+        senha = String.format("N%03d", this.getNumeroN());
+
         return new Senha(senha);
     }
 
