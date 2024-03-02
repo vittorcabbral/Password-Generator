@@ -18,7 +18,7 @@ public class App {
 
             if (opc == 1) System.out.println(novaFila.criarSenha(false));
             if (opc == 2) System.out.println(novaFila.criarSenha(true));
-            // if (opc == 3) System.out.println(novaFila.chamarSenha());
+            if (opc == 3) System.out.println(novaFila.chamarSenha());
             if (opc == 4) System.out.println(novaFila.toString(false));
             if (opc == 5) System.out.println(novaFila.toString(true));
             if (opc == 6) break;

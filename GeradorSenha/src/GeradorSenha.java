@@ -24,10 +24,10 @@ public class GeradorSenha {
         this.numeroP = numeroP;
     }
 
-    public Senha gerarSenha(boolean prioriade){
+    public Senha gerarSenha(boolean prioridade){
         String senha = "";
 
-        if(prioriade){
+        if(prioridade){
             this.setNumeroP(this.getNumeroP() + 1);
             senha = String.format("P%03d", this.getNumeroP());
             return new Senha(senha);
